@@ -1,0 +1,71 @@
+<mat-card>
+    <mat-card-title>Register</mat-card-title>
+    <mat-card-content>
+        <form class="register-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <p>
+                <mat-form-field class="full-width">
+                    <input matInput [formControl]="firstNameInput" [errorStateMatcher]="matcher"
+                        placeholder="First Name" cdkFocusInitial>
+                    <mat-error *ngIf="firstNameInput.hasError('required')">
+                        First Name is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field class="full-width">
+                    <input matInput [formControl]="lastNameInput" [errorStateMatcher]="matcher"
+                        placeholder="Last Name" >
+                    <mat-error *ngIf="lastNameInput.hasError('required')">
+                        Last Name is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field class="full-width">
+                    <input matInput [formControl]="nicknameInput" [errorStateMatcher]="matcher"
+                        placeholder="Nickname">
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field class="full-width">
+                    <input matInput [formControl]="emailInput" [errorStateMatcher]="matcher" 
+                        placeholder="E-mail">
+                    <mat-error *ngIf="emailInput.hasError('email') && !emailInput.hasError('required')">
+                        Please enter a valid e-mail address
+                    </mat-error>
+                    <mat-error *ngIf="emailInput.hasError('required')">
+                        Email is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field class="full-width">
+                    <input matInput [formControl]="passwordInput" [type]="hide ? 'password' : 'text'"
+                        placeholder="Password">
+                    <mat-icon matSuffix (click)="hide = !hide">
+                        {{hide ? 'visibility_off' : 'visibility'}}
+                    </mat-icon>
+                    <mat-error *ngIf="passwordInput.hasError('min') && !passwordInput.hasError('required')">
+                        Password must have at least 4 characters
+                    </mat-error>
+                    <mat-error *ngIf="passwordInput.hasError('required')">
+                        Password is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field class="full-width">
+                    <mat-label>Type of member</mat-label>
+                    <mat-select [formControl]="roleInput">
+                        <mat-option *ngFor="let role of roles" [value]="role">
+                            {{role.ufName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </p>
+            <div class="button">
+                <button mat-raised-button color="primary" [disabled]="loading" type="submit">Register</button>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>

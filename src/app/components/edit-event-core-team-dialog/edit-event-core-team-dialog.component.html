@@ -1,0 +1,27 @@
+<h1 mat-dialog-title>Add Core Team Member</h1>
+<div mat-dialog-content>
+  <form [formGroup]="inputForm">
+    <mat-form-field>
+      <mat-select [formControl]="userInput" placeholder="User" (openedChange)="myInput.focus()" >
+        <input class="myInput" #myInput matInput focused="'true'" type="text"
+          (keyup)="search($event.target.value)" autocomplete="off" placeholder="Search">
+        <mat-divider></mat-divider>
+        <mat-option *ngFor="let user of users" [value]="user">
+          {{user.firstName}} {{user.lastName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field >
+      <mat-select [formControl]="positionInput">
+        <mat-option *ngFor="let position of positions" [value]="position">
+          {{position.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancelClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Submit</button>
+</div>
+

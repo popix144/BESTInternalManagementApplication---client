@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>Edit event info</h1>
+<div mat-dialog-content>
+    <form [formGroup]="formGroup">
+        <mat-form-field>
+            <mat-label>Description</mat-label>
+            <textarea matInput [(ngModel)]="data.event.description" [formControl]="descriptionControl">
+            </textarea>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Since</mat-label>
+            <input matInput type="number" [(ngModel)]="data.event.firstYear" 
+                [formControl]="firstYearControl" min="1995" class="form-control">
+        </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onCancelClick()">Cancel</button>
+    <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Submit</button>
+</div>

@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Add update</h1>
+<div mat-dialog-content>
+    <p>add-update-dialog works!</p>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onCancelClick()">Cancel</button>
+    <button mat-button [mat-dialog-close]="data.update" cdkFocusInitial>Submit</button>
+</div>

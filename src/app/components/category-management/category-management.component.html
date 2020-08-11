@@ -1,0 +1,10 @@
+<mat-progress-bar mode="indeterminate" *ngIf="showProgressBar"></mat-progress-bar>
+<button mat-raised-button color="primary" (click)="openSaveCategoryDialog()">Add category</button>
+<mat-list>
+    <mat-list-item *ngFor="let category of categories">
+      <h3 mat-line> {{ category.name }} </h3>
+      <button mat-icon-button (click)="delete(category)">
+        <mat-icon class="mat-24">delete</mat-icon>
+      </button>
+    </mat-list-item>
+</mat-list>

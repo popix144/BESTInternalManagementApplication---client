@@ -1,0 +1,10 @@
+<mat-progress-bar mode="indeterminate" *ngIf="showProgressBar"></mat-progress-bar>
+<button mat-raised-button color="primary" (click)="openSavePositionDialog()">Add position</button>
+<mat-list>
+    <mat-list-item *ngFor="let position of positions">
+      <h3 mat-line> {{ position.name }} </h3>
+      <button mat-icon-button (click)="delete(position)">
+        <mat-icon class="mat-24">delete</mat-icon>
+      </button>
+    </mat-list-item>
+</mat-list>

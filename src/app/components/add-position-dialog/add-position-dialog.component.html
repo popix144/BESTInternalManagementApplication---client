@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>Add position</h1>
+<div mat-dialog-content>
+    <mat-form-field>
+        <input matInput [(ngModel)]="data.position">
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onCancelClick()">Cancel</button>
+    <button mat-button [mat-dialog-close]="data.position" cdkFocusInitial>Submit</button>
+</div>

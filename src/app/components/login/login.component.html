@@ -1,0 +1,38 @@
+<mat-card>
+    <mat-card-title>Login</mat-card-title>
+    <mat-card-content>
+        <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <p>
+                <mat-form-field class="full-width">
+                    <input matInput [formControl]="emailInput" [errorStateMatcher]="matcher" 
+                        placeholder="E-mail" cdkFocusInitial>
+                    <mat-error *ngIf="emailInput.hasError('email') && !emailInput.hasError('required')">
+                        Please enter a valid e-mail address
+                    </mat-error>
+                    <mat-error *ngIf="emailInput.hasError('required')">
+                        Email is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field class="full-width">
+                    <input matInput [formControl]="passwordInput" [type]="hide ? 'password' : 'text'"
+                        placeholder="Password">
+                    <mat-icon matSuffix (click)="hide = !hide">
+                        {{hide ? 'visibility_off' : 'visibility'}}
+                    </mat-icon>
+                    <mat-error *ngIf="passwordInput.hasError('min') && !passwordInput.hasError('required')">
+                        Password must have at least 4 characters
+                    </mat-error>
+                    <mat-error *ngIf="passwordInput.hasError('required')">
+                        Password is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+            </p>
+
+            <div class="button">
+                <button mat-raised-button color="primary" [disabled]="loading" type="submit">Login</button>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>

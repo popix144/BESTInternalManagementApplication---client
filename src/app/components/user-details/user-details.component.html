@@ -1,0 +1,19 @@
+<h1 class="h1">User Details</h1>
+<div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" class="products">
+  <mat-card fxFlex="100%" fxFlex.gt-sm="66%" class="mat-elevation-z1">
+    <mat-card-header>
+      <mat-card-title>{{user.firstName}} {{user.lastName}}</mat-card-title>
+      <mat-card-subtitle>{{user.nickname}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <h4>Email</h4>
+      <p>
+        {{user.email}}
+      </p>
+      <h4>Is Enabled</h4>
+      <p>
+        {{user.enabled}}
+      </p>
+    </mat-card-content>
+  </mat-card>
+</div>

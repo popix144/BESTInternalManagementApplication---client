@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>Edit Main Organizer</h1>
+<div mat-dialog-content>
+  <mat-selection-list #list>
+    <mat-list-option *ngFor="let user of users" [value]="user"
+      [selected]="data.event.mainOrganizer !== null && data.event.mainOrganizer.id === user.id">
+      {{user.firstName}} {{user.lastName}}
+    </mat-list-option>
+  </mat-selection-list>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancelClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Submit</button>
+</div>

@@ -1,0 +1,79 @@
+<mat-progress-bar mode="indeterminate" *ngIf="showProgressBar"></mat-progress-bar>
+<mat-card>
+    <mat-card-title>Send notification</mat-card-title>
+    <mat-card-content>
+        <form class="notification-form" [formGroup]="notificationForm" (ngSubmit)="onSubmit()">
+            <p>
+                <mat-form-field class="full-width">
+                    <input matInput [formControl]="descriptionInput" placeholder="Description" cdkFocusInitial>
+                    <mat-error *ngIf="descriptionInput.hasError('required')">
+                        Description is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field class="full-width">
+                    <input matInput [formControl]="designInput" [type]="hide ? 'password' : 'text'"
+                        placeholder="Design">
+                    <mat-icon matSuffix (click)="hide = !hide">
+                        {{hide ? 'visibility_off' : 'visibility'}}
+                    </mat-icon>
+                    <mat-error *ngIf="designInput.hasError('required')">
+                        Design Grade is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field class="full-width">
+                    <input matInput [formControl]="prInput" [type]="hide ? 'password' : 'text'"
+                        placeholder="PR">
+                    <mat-icon matSuffix (click)="hide = !hide">
+                        {{hide ? 'visibility_off' : 'visibility'}}
+                    </mat-icon>
+                    <mat-error *ngIf="prInput.hasError('required')">
+                        PR Grade is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field class="full-width">
+                    <input matInput [formControl]="hrInput" [type]="hide ? 'password' : 'text'"
+                        placeholder="HR">
+                    <mat-icon matSuffix (click)="hide = !hide">
+                        {{hide ? 'visibility_off' : 'visibility'}}
+                    </mat-icon>
+                    <mat-error *ngIf="hrInput.hasError('required')">
+                        HR Grade is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field class="full-width">
+                    <input matInput [formControl]="itInput" [type]="hide ? 'password' : 'text'"
+                        placeholder="IT">
+                    <mat-icon matSuffix (click)="hide = !hide">
+                        {{hide ? 'visibility_off' : 'visibility'}}
+                    </mat-icon>
+                    <mat-error *ngIf="itInput.hasError('required')">
+                        IT Grade is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field class="full-width">
+                    <input matInput [formControl]="frInput" [type]="hide ? 'password' : 'text'"
+                        placeholder="FR">
+                    <mat-icon matSuffix (click)="hide = !hide">
+                        {{hide ? 'visibility_off' : 'visibility'}}
+                    </mat-icon>
+                    <mat-error *ngIf="frInput.hasError('required')">
+                        FR Grade is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+            </p>
+            <div class="button">
+                <button mat-raised-button color="primary" [disabled]="loading" type="submit">Get Recommended Users</button>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>
