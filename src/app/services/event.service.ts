@@ -30,7 +30,7 @@ export class EventService {
   }
 
   removeCoreTeamMember(cTM: ICoreTeamMember) {
-    return this.http.delete(environment.url + '/events/' + cTM.event + '/coreTeam/' + cTM.user.id);
+    return this.http.delete(environment.url + '/events/' + cTM.event.id + '/coreTeam/' + cTM.userEvent.id);
   }
 
   addCoreTeamMember(eventId, userId, position) {

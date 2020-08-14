@@ -1,6 +1,8 @@
-import { IEvent } from './event.interface';
 import { IRole } from './role.interface';
+import { IUserCategory } from './userCategory.interface';
+import { IDesiredUserCategories } from './desiredUserCategory.interface';
 import { ICoreTeamMember } from './coreTeamMember.interface';
+import { IEventUser } from './eventUser.interface';
 
 export interface IUser {
   id: number,
@@ -8,8 +10,11 @@ export interface IUser {
   lastName: string,
   nickname: string,
   email: string,
-  password: string,
   localDateTime: string,
   roles: IRole[],
-  enabled: boolean
+  enabled: boolean,
+  userCategories: IUserCategory[],
+  desiredUserCategories: IDesiredUserCategories[];
+  coreTeamMembers: ICoreTeamMember[],
+  eventsMainOrganizer: IEventUser[]
 }

@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatTableDataSource, MatDialog, MatSnackBar } from '@angular/material';
-import { IUser } from 'src/app/models/user.interface';
 import { UserService } from 'src/app/services/user.service';
 import { trigger, state, transition, animate, style } from '@angular/animations';
 import { EditUserDialogComponent } from '../edit-user-dialog/edit-user-dialog.component';
+import { IUser } from 'src/app/models/user.interface';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user-management',
@@ -16,13 +17,14 @@ import { EditUserDialogComponent } from '../edit-user-dialog/edit-user-dialog.co
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ])]
 })
-export class UserManagementComponent implements OnInit {
+export class UserManagementComponent implements OnInit, OnDestroy {
 
   columns = { firstName: 'First Name', lastName: 'Last Name', enabled: 'Is enabled'}
   displayedColumns: string[] = ['firstName', 'lastName', 'enabled'];
   users = new MatTableDataSource<IUser>();
   expandedUser: IUser | null;
   showProgressBar: boolean = false;
+  subscriptions: Subscription[] = [];
 
   constructor(private userService: UserService,
               private dialog: MatDialog,
@@ -38,12 +40,14 @@ export class UserManagementComponent implements OnInit {
   }
 
   getData() {
-    this.userService.getAll().subscribe(users => {
+    this.subscriptions.push(this.userService.getAll().subscribe(users => {
       this.users.data = users;
-    });
+    }));
   }
 
-  ngOnDestroy() {}
+  ngOnDestroy() {
+    this.subscriptions.forEach(s => s.unsubscribe());
+  }
 
   edit(user: IUser) {
     const dialogRef = this.dialog.open(EditUserDialogComponent, {

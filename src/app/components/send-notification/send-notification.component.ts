@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoginService } from 'src/app/services/login.service';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import { first } from 'rxjs/operators';
-import { ClusteringService } from 'src/app/services/clustering.service';
 import { ConfirmUsersDialogComponent } from '../confirm-users-dialog/confirm-users-dialog.component';
+import { ICategory } from 'src/app/models/category.interface';
+import { CategoryService } from 'src/app/services/category.service';
+import { Subscription } from 'rxjs';
+import { SendNotificationService } from 'src/app/services/send-notification.service';
 
 @Component({
   selector: 'app-send-notification',
@@ -34,19 +36,23 @@ export class SendNotificationComponent implements OnInit {
       Validators.required
     ])
   });
-  hide = true;
   submitted = false;
   loading = false;
   showProgressBar: boolean = false;
+  categories: ICategory[] = [];
+  subscriptions: Subscription[] = [];
 
   constructor(
     private router: Router,
-    private clusteringService: ClusteringService,
+    private categoryService: CategoryService,
+    private sendNotificationService: SendNotificationService,
     private snackBar: MatSnackBar,
     private dialog: MatDialog
   ) {}
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.subscriptions.push(this.categoryService.getAll().subscribe(categories => this.categories = categories));
+  }
 
   onSubmit() {
     this.loading = true;
@@ -57,35 +63,34 @@ export class SendNotificationComponent implements OnInit {
       return;
     }
 
-    const dialogRef = this.dialog.open(ConfirmUsersDialogComponent, {
-      width: '300px',
-      data: {users: ["User1", "User2", "User3", "User4", "User5", "User6", "User7", "User8",
-                  "User9", "User10", "User11", "User12", "User13", "User14", "User15", "User16", "User17", "User18"] }
-    });
+    this.sendNotificationService.sendNotification(
+        this.descriptionInput.value, 
+        { design: this.designInput.value, 
+          pr: this.prInput.value,
+          fr: this.frInput.value,
+          hr: this.hrInput.value,
+          it: this.itInput.value } )
+      .subscribe(
+        (data) => {
+          console.log(data);
 
-    dialogRef.afterClosed().subscribe((result: any) => {
-      if (result) {
-        this.showProgressBar = true;
-        
-      }
-    });
+          const dialogRef = this.dialog.open(ConfirmUsersDialogComponent, {
+            width: '300px',
+            data: JSON.parse(JSON.stringify(data))
+          });
+      
+          dialogRef.afterClosed().subscribe((result: any) => {
+            if (result) {
+              console.log(result);
+            }
+          });
 
-    // this.clusteringService.sendNotification(
-    //     this.descriptionInput.value, 
-    //     { design: this.designInput.value, 
-    //       pr: this.prInput.value,
-    //       fr: this.frInput.value,
-    //       hr: this.hrInput.value,
-    //       it: this.itInput.value } )
-    //   .subscribe(
-    //     (data) => {
-    //       console.log(data);
-    //     }, (error) => {
-    //       this.snackBar.open("Recommended users could not be sent.");
-    //       this.showProgressBar = false;
-    //     }, () => {
-    //       this.showProgressBar = false;
-    //   });
+        }, (error) => {
+          this.snackBar.open("Recommended users could not be sent.");
+          this.showProgressBar = false;
+        }, () => {
+          this.showProgressBar = false;
+      });
   }
 
   get descriptionInput() { return this.notificationForm.get('description'); }

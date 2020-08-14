@@ -3,7 +3,7 @@ export interface IUserSubscription {
     firstName: string,
     lastName: string,
     subscriptionDTO: any,
-    grades: any,
     fit: boolean,
-    computed: boolean
+    computed: boolean,
+    firstRoundRecommended: boolean
   }

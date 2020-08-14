@@ -1,11 +1,11 @@
-import { IUser } from './user.interface';
 import { ICoreTeamMember } from './coreTeamMember.interface';
+import { IUserShort } from './userShort.interface';
 
 export interface IEvent {
     id: number,
     name: string,
     firstYear: number,
     description: string,
-    mainOrganizer: IUser,
+    mainOrganizer: IUserShort,
     coreTeamMembers: ICoreTeamMember[]
 }

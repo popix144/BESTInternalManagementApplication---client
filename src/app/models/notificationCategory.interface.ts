@@ -1,4 +1,4 @@
 export interface INotificationCategory {
     grade: number,
-    category: any
+    category: string
 }

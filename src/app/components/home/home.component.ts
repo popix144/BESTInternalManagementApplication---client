@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
     let coreTeamMembers = '';
     if(event.coreTeamMembers.length > 0) {
       event.coreTeamMembers.forEach(member => {
-        coreTeamMembers += member.user.firstName + ' ' + member.user.lastName + ',';
+        coreTeamMembers += member.userEvent.firstName + ' ' + member.userEvent.lastName + '-' + member.position + ',';
       })
     }
     let mainOrganizer = null;

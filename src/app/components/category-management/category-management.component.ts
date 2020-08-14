@@ -55,6 +55,7 @@ export class CategoryManagementComponent implements OnInit {
         this.categoryService.save({name: this.newCategoryName}).subscribe(
           (data) => {
             this.getData();
+            this.showProgressBar = false;
           }, (error) => {
             this.snackBar.open("Category could not be saved.");
             this.showProgressBar = false;

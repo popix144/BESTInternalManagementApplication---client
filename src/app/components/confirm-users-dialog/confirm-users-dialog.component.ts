@@ -1,6 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
+import { IUserSubscription } from 'src/app/models/userSubscription.interface';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-confirm-users-dialog',
@@ -10,7 +12,8 @@ import { FormControl } from '@angular/forms';
 export class ConfirmUsersDialogComponent {
 
   checked: boolean;
-  selectedOptions: String[];
+  users: IUserSubscription[] = [];
+  selectedOptions: IUserSubscription[];
   formControl: FormControl;
 
   constructor(public dialogRef: MatDialogRef<ConfirmUsersDialogComponent>,
@@ -18,7 +21,8 @@ export class ConfirmUsersDialogComponent {
 
   ngOnInit() {
     this.checked = true;
-    this.selectedOptions = ["User1", "User2", "User9", "User10", "User11", "User12", "User13"];
+    this.selectedOptions = this.data.users;
+    this.users = this.data.users.slice();
     this.formControl = new FormControl(this.selectedOptions);
   }
 
@@ -30,7 +34,7 @@ export class ConfirmUsersDialogComponent {
     this.dialogRef.close(false);
   }
 
-  comparator(r1: string, r2: string) {
-    return r1 && r2 && r1 === r2;
+  comparator(r1: IUserSubscription, r2: IUserSubscription) {
+    return r1 && r2 && r1.id === r2.id && r1.firstRoundRecommended && r2.firstRoundRecommended;
   }
 }

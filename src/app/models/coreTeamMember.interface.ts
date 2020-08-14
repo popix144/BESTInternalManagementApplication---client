@@ -1,7 +1,8 @@
-import { IUser } from './user.interface';
+import { IEventUser } from './eventUser.interface';
+import { IUserShort } from './userShort.interface';
 
 export interface ICoreTeamMember {
-    event: number;
-    user: any;
+    event: IEventUser;
+    userEvent: IUserShort;
     position: string;
 }

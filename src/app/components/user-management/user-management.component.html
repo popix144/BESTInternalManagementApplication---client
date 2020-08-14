@@ -31,8 +31,18 @@
           </mat-list-item>
           <mat-divider></mat-divider>
           <div mat-subheader>Events - Core Team Member</div>
-          <mat-list-item *ngFor="let event of user.eventsCoreTeam">
-            {{event.name}}
+          <mat-list-item *ngFor="let coreTeamMember of user.coreTeamMembers">
+            {{coreTeamMember.event.name}} - {{coreTeamMember.position}}
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <div mat-subheader>Skills Grades</div>
+          <mat-list-item *ngFor="let userCategory of user.userCategories">
+            {{userCategory.categoryName}} - {{userCategory.grade}}
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <div mat-subheader>Interest in developing Skills</div>
+          <mat-list-item *ngFor="let desiredUserCategory of user.desiredUserCategories">
+            {{desiredUserCategory.categoryName}} - {{desiredUserCategory.grade}}
           </mat-list-item>
           <mat-action-list>
             <button mat-raised-button class="margin" color="primary" (click)="edit(user)">Edit</button>

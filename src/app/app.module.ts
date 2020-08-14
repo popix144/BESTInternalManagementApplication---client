@@ -32,8 +32,6 @@ import { EditEventInfoDialogComponent } from './components/edit-event-info-dialo
 import { EditEventMainOrganizerDialogComponent } from './components/edit-event-main-organizer-dialog/edit-event-main-organizer-dialog.component';
 import { EditEventCoreTeamDialogComponent } from './components/edit-event-core-team-dialog/edit-event-core-team-dialog.component';
 import { RegisterComponent } from './components/register/register.component';
-import { PositionManagementComponent } from './components/position-management/position-management.component';
-import { AddPositionDialogComponent } from './components/add-position-dialog/add-position-dialog.component';
 import { AddUpdateDialogComponent } from './components/add-update-dialog/add-update-dialog.component';
 import { SendNotificationComponent } from './components/send-notification/send-notification.component';
 import { ConfirmUsersDialogComponent } from './components/confirm-users-dialog/confirm-users-dialog.component';
@@ -55,8 +53,6 @@ import { ConfirmUsersDialogComponent } from './components/confirm-users-dialog/c
     EditEventMainOrganizerDialogComponent,
     EditEventCoreTeamDialogComponent,
     RegisterComponent,
-    PositionManagementComponent,
-    AddPositionDialogComponent,
     AddUpdateDialogComponent,
     SendNotificationComponent,
     ConfirmUsersDialogComponent
@@ -67,7 +63,6 @@ import { ConfirmUsersDialogComponent } from './components/confirm-users-dialog/c
     EditEventInfoDialogComponent,
     EditEventCoreTeamDialogComponent,
     EditEventMainOrganizerDialogComponent,
-    AddPositionDialogComponent,
     AddUpdateDialogComponent,
     ConfirmUsersDialogComponent
   ],

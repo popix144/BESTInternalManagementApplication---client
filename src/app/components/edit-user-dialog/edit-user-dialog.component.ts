@@ -3,7 +3,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { RoleService } from 'src/app/services/role.service';
 import { IRole } from 'src/app/models/role.interface';
 import { FormControl } from '@angular/forms';
-import { IUser } from 'src/app/models/user.interface';
 
 @Component({
   selector: 'app-edit-user-dialog',

@@ -30,7 +30,7 @@
           <mat-divider></mat-divider>
           <div mat-subheader>Core Team Members</div>
           <mat-list-item *ngFor="let cTM of event.coreTeamMembers">
-            {{cTM.user.firstName}} {{cTM.user.lastName}}  - {{cTM.position}}
+            {{cTM.userEvent.firstName}} {{cTM.userEvent.lastName}}  - {{cTM.position}}
             <button mat-icon-button (click)="removeCoreTeamMember(cTM)">
               <mat-icon class="mat-24">delete</mat-icon>
             </button>

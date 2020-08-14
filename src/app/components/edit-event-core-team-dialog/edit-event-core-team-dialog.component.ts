@@ -3,8 +3,8 @@ import { IUser } from 'src/app/models/user.interface';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { UserService } from 'src/app/services/user.service';
-import { PositionService } from 'src/app/services/position.service';
 import { Subscription } from 'rxjs';
+import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
   selector: 'app-edit-event-core-team-dialog',
@@ -30,30 +30,30 @@ export class EditEventCoreTeamDialogComponent implements OnInit, OnDestroy {
     public dialogRef: MatDialogRef<EditEventCoreTeamDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private userService: UserService,
-    private positionService: PositionService) {}
+    private categoryService: CategoryService) {}
 
   ngOnInit() {
     this.subscriptions.push(
-    this.userService.getAll().subscribe(users => {
-      this.users = users;
-      this.selectedUsers = this.users;
+      this.userService.getAll().subscribe(users => {
+        this.users = users;
+        this.selectedUsers = this.users;
     }));
     this.subscriptions.push(
-    this.positionService.getAll().subscribe(positions => {
-      this.positions = positions;
+      this.categoryService.getAll().subscribe(positions => {
+        this.positions = positions;
     }));
     this.subscriptions.push(
-    this.inputForm.get('user').valueChanges.subscribe(selectedValue => {
-      this.data.user = this.userInput.value;
+      this.inputForm.get('user').valueChanges.subscribe(selectedValue => {
+        this.data.user = this.userInput.value;
     }));
     this.subscriptions.push(
-    this.inputForm.get('position').valueChanges.subscribe(selectedValue => {
-      this.data.position = this.positionInput.value.name;
+      this.inputForm.get('position').valueChanges.subscribe(selectedValue => {
+        this.data.position = this.positionInput.value.name;
     }));
   }
 
   search(query: string){
-    console.log('query', query)
+    // console.log('query', query)
     this.selectedUsers = this.select(query);
   }
 

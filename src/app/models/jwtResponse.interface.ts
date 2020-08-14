@@ -1,8 +1,7 @@
-import { Role } from "./role.enum";
-import { IUser } from './user.interface';
+import { IUserShort } from './userShort.interface';
 
 export interface JwtResponse {
-    user: IUser;
-    jwtToken: string;
+    user: IUserShort,
+    jwtToken: string
 }
   
