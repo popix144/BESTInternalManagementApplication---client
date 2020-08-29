@@ -92,4 +92,8 @@ export class EventDetailsComponent implements OnInit, OnDestroy {
       }
     });
   }
+
+  getBackgrounImagePath(eventName: string) : String {
+    return "url('C:/Users/Dell/UBB/Licenta/BESTApplication/client/src/assets/logos_events/logo_" + eventName + ".png')";
+  }
 }

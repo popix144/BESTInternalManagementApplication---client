@@ -19,6 +19,7 @@ export class AppComponent implements OnInit, OnDestroy {
   offline: boolean;
   isLoggedIn: boolean;
   isAdmin: boolean;
+  isSubscribed: boolean;
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
   subscriptions: Subscription[] = [];
@@ -41,6 +42,7 @@ export class AppComponent implements OnInit, OnDestroy {
           this.isLoggedIn = currentUser !== null
           if (currentUser !== null) {
             this.isAdmin = false;
+            this.isSubscribed = currentUser.subscribed;
             currentUser.user.roles.forEach(role => { 
               if (role.name === Role.Management) {
                 this.isAdmin = true;
@@ -73,6 +75,14 @@ export class AppComponent implements OnInit, OnDestroy {
     this.router.navigate(['sendNotification'])
   }
 
+  manageAccount() {
+    this.router.navigate(['manageAccount'])
+  }
+
+  changeInterestSkills() {
+    this.router.navigate(['changeInterest'])
+  }
+
   ngOnDestroy() {
     this.mobileQuery.removeListener(this._mobileQueryListener);
     this.subscriptions.forEach(subscription => {
@@ -81,10 +91,18 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   subscribeToNotifications() {
+    console.log("Subscribe clicked.");
+    console.log(this.swPush.isEnabled);
     this.swPush.requestSubscription({
       serverPublicKey: environment.VAPID_PUBLIC_KEY
     })
-    .then(sub => this.subscriptionService.addSubscriber(sub).subscribe())
-    .catch(err => console.error("Could not subscribe to notifications", err));
+    .then(sub => { 
+      console.log("Add subscription.");
+      this.subscriptionService.addSubscriber(sub).subscribe();
+    })
+    .catch(err => {
+      console.log("Add subscription error.");
+      console.error("Could not subscribe to notifications", err);
+    });
   }
 }

@@ -9,6 +9,8 @@ import { EventManagementComponent } from './components/event-management/event-ma
 import { CategoryManagementComponent } from './components/category-management/category-management.component';
 import { RegisterComponent } from './components/register/register.component';
 import { SendNotificationComponent } from './components/send-notification/send-notification.component';
+import { ChangeInterestCategoryComponent } from './components/change-interest-category/change-interest-category.component';
+import { ManageAccountComponent } from './components/manage-account/manage-account.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -16,6 +18,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'sendNotification', component: SendNotificationComponent },
+  { path: 'manageAccount', component: ManageAccountComponent},
+  { path: 'changeInterest', component: ChangeInterestCategoryComponent},
   { path: 'admin', component: AdminComponent, children: [
     { path: 'users', component: UserManagementComponent },
     { path: 'events', component: EventManagementComponent },

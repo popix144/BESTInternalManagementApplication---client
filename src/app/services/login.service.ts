@@ -32,8 +32,9 @@ export class LoginService {
       map((response: any) => {
         if (response) {
           const instanceUser: JwtResponse = {
-            user: response,
-            jwtToken: localStorage.getItem('token')
+            user: response.user,
+            jwtToken: localStorage.getItem('token'),
+            subscribed: response.subscribed 
           };
           this.currentUserSubject.next(instanceUser);
         }
@@ -57,7 +58,8 @@ export class LoginService {
             localStorage.setItem('token', response.jwtToken);
             const instanceUser: JwtResponse = {
               user: response.user,
-              jwtToken: response.jwtToken
+              jwtToken: response.jwtToken,
+              subscribed: response.subscribed
             };
             this.currentUserSubject.next(instanceUser);
           }

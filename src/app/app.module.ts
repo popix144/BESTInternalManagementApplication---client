@@ -8,7 +8,8 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { MatButtonModule, MatCheckboxModule, MatIconModule, MatMenuModule,
   MatSidenavModule, MatExpansionModule, MatListModule, MatTableModule,
   MatPaginatorModule, MatCardModule, MatDividerModule, MatProgressSpinnerModule,
-  MatFormFieldModule, MatInputModule, MatDialogModule, MatSnackBarModule, MatProgressBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSlideToggleModule, MatSelectModule } from '@angular/material';
+  MatFormFieldModule, MatInputModule, MatDialogModule, MatSnackBarModule, MatProgressBarModule,
+  MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSlideToggleModule, MatSelectModule } from '@angular/material';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -35,6 +36,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { AddUpdateDialogComponent } from './components/add-update-dialog/add-update-dialog.component';
 import { SendNotificationComponent } from './components/send-notification/send-notification.component';
 import { ConfirmUsersDialogComponent } from './components/confirm-users-dialog/confirm-users-dialog.component';
+import { ManageAccountComponent } from './components/manage-account/manage-account.component';
+import { ChangeInterestCategoryComponent } from './components/change-interest-category/change-interest-category.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +58,9 @@ import { ConfirmUsersDialogComponent } from './components/confirm-users-dialog/c
     RegisterComponent,
     AddUpdateDialogComponent,
     SendNotificationComponent,
-    ConfirmUsersDialogComponent
+    ConfirmUsersDialogComponent,
+    ManageAccountComponent,
+    ChangeInterestCategoryComponent
   ],
   entryComponents: [
     EditUserDialogComponent,

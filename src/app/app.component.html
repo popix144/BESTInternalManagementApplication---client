@@ -6,7 +6,7 @@
       </button>
       <button mat-button routerLink="/">{{title}}</button>
     </span>
-    <button mat-raised-button color="secondary" *ngIf="isLoggedIn" (click)="subscribeToNotifications()">
+    <button mat-raised-button color="secondary" *ngIf="isLoggedIn && !isSubscribed" (click)="subscribeToNotifications()">
       Subscribe
     </button>
 </mat-toolbar>
@@ -21,6 +21,8 @@
         <a mat-list-item *ngIf="!isLoggedIn" (click)="login()"> Login </a>
         <a mat-list-item *ngIf="!isLoggedIn" (click)="register()"> Register </a>
         <a mat-list-item *ngIf="isLoggedIn" (click)="sendNotification()"> Send notification </a>
+        <a mat-list-item *ngIf="isLoggedIn" (click)="manageAccount()"> Change password </a>
+        <a mat-list-item *ngIf="isLoggedIn" (click)="changeInterestSkills()"> Edit interests in skills </a>
         <a mat-list-item *ngIf="isLoggedIn" (click)="logout()"> Logout </a>
       </mat-nav-list>
 

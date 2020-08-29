@@ -1,24 +1,7 @@
-<mat-progress-bar mode="indeterminate" *ngIf="showProgressBar"></mat-progress-bar>
 <mat-card>
-    <mat-card-title>Send notification</mat-card-title>
+    <mat-card-title>Change interest in skills</mat-card-title>
     <mat-card-content>
-        <form class="notification-form" [formGroup]="notificationForm" (ngSubmit)="onSubmit()">
-            <p>
-                <mat-form-field class="full-width">
-                    <input matInput [formControl]="titleInput" placeholder="Title" cdkFocusInitial>
-                    <mat-error *ngIf="titleInput.hasError('required')">
-                        Title is <strong>required</strong>
-                    </mat-error>
-                </mat-form-field>
-            </p>
-            <p>
-                <mat-form-field class="full-width">
-                    <input matInput [formControl]="descriptionInput" placeholder="Description">
-                    <mat-error *ngIf="descriptionInput.hasError('required')">
-                        Description is <strong>required</strong>
-                    </mat-error>
-                </mat-form-field>
-            </p>
+        <form class="edit-skills-form" [formGroup]="editSkillsForm" (ngSubmit)="onSubmit()">
             <p>
                 <mat-form-field class="full-width">
                     <input matInput [formControl]="designInput" placeholder="Design">
@@ -59,8 +42,9 @@
                     </mat-error>
                 </mat-form-field>
             </p>
+
             <div class="button">
-                <button mat-raised-button color="primary" [disabled]="loading" type="submit">Get Recommended Users</button>
+                <button mat-raised-button color="primary" type="submit">Submit</button>
             </div>
         </form>
     </mat-card-content>

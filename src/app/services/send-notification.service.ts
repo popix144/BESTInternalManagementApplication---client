@@ -11,8 +11,8 @@ export class SendNotificationService {
 
   constructor(private http: HttpClient) { }
 
-  sendNotification(description, grades) {
+  sendNotification(title, description, grades) {
       return <Observable<IRecommendationResponse>> this.http.post<IRecommendationResponse>(environment.url + `/notifications/send`, 
-        {text: description, notificationCategories: grades});
+        {title: title, text: description, notificationCategories: grades});
   }
 }

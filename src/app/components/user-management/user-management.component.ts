@@ -67,6 +67,15 @@ export class UserManagementComponent implements OnInit, OnDestroy {
           }, () => {
             this.showProgressBar = false;
         });
+        this.userService.updateUserCategories(result.user).subscribe(
+          (data) => {
+            this.getData();
+          }, (error) => {
+            this.snackBar.open("User categories could not be updated.");
+            this.showProgressBar = false;
+          }, () => {
+            this.showProgressBar = false;
+        });
       }
     });
   }

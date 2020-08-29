@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
 import { IUser } from '../models/user.interface';
+import { IDesiredUserCategories } from '../models/desiredUserCategory.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class UserService {
   }
 
   getByToken() {
-      return <Observable<IUser>> this.http.get<IUser>(environment.url + `/users/token`);
+      return <Observable<IUser>> this.http.get<IUser>(environment.url + `/users/tokenAll`);
   }
 
   update(user: IUser) {
@@ -34,5 +35,19 @@ export class UserService {
       enabled: user.enabled,
       roles: user.roles
     });
+  }
+
+  updateUserCategories(user: IUser) {
+    console.log(user.userCategories);
+    return <Observable<IUser>> this.http.put(environment.url + `/users/` + user.id + `/userCategories`, user.userCategories);
+  }
+
+  updateDesiredUserCategories(desiredUserCategories: IDesiredUserCategories[]) {
+    console.log(desiredUserCategories);
+    return <Observable<IUser>> this.http.put(environment.url + `/users/desiredUserCategories`, desiredUserCategories);
+  }
+
+  changePassword(newPassword: String) {
+    return <Observable<IUser>> this.http.put(environment.url + '/users/changePassword', newPassword);
   }
 }

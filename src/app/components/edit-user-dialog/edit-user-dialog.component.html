@@ -20,7 +20,49 @@
   </section>
   <mat-divider></mat-divider>
   <div mat-subheader>Skills Grades</div>
-</div>
+    <form class="edit-skills-form" [formGroup]="editSkillsForm">
+      <p>
+          <mat-form-field class="full-width">
+              <input matInput [formControl]="designInput" placeholder="Design">
+              <mat-error *ngIf="designInput.hasError('required')">
+                  Design Grade is <strong>required</strong>
+              </mat-error>
+          </mat-form-field>
+      </p>
+      <p>
+          <mat-form-field class="full-width">
+              <input matInput [formControl]="prInput" placeholder="PR">
+              <mat-error *ngIf="prInput.hasError('required')">
+                  PR Grade is <strong>required</strong>
+              </mat-error>
+          </mat-form-field>
+      </p>
+      <p>
+          <mat-form-field class="full-width">
+              <input matInput [formControl]="hrInput" placeholder="HR">
+              <mat-error *ngIf="hrInput.hasError('required')">
+                  HR Grade is <strong>required</strong>
+              </mat-error>
+          </mat-form-field>
+      </p>
+      <p>
+          <mat-form-field class="full-width">
+              <input matInput [formControl]="itInput" placeholder="IT">
+              <mat-error *ngIf="itInput.hasError('required')">
+                  IT Grade is <strong>required</strong>
+              </mat-error>
+          </mat-form-field>
+      </p>
+      <p>
+          <mat-form-field class="full-width">
+              <input matInput [formControl]="frInput" placeholder="FR">
+              <mat-error *ngIf="frInput.hasError('required')">
+                  FR Grade is <strong>required</strong>
+              </mat-error>
+          </mat-form-field>
+      </p>
+    </form>
+  </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onCancelClick()">Cancel</button>
   <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Submit</button>

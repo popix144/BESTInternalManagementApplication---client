@@ -3,5 +3,5 @@ import { IUserSubscription } from './userSubscription.interface';
 
 export interface IRecommendationResponse {
     notification: INotification,
-    userSubscriptionDTO: IUserSubscription[]
+    users: IUserSubscription[]
 }
