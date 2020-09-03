@@ -2,12 +2,19 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import { ConfirmUsersDialogComponent } from '../confirm-users-dialog/confirm-users-dialog.component';
-import { ICategory } from 'src/app/models/category.interface';
 import { CategoryService } from 'src/app/services/category.service';
 import { Subscription } from 'rxjs';
 import { SendNotificationService } from 'src/app/services/send-notification.service';
 import { IRecommendationResponse } from 'src/app/models/recommendationResponse.interface';
 import { environment } from 'src/environments/environment.prod';
+import { ICategory } from 'src/app/models/category.interface';
+// import webPush from 'web-push';
+
+// if (typeof webPush === 'undefined') {
+//   let webPush = require('web-push');
+// }
+
+// console.log(webPush);
 
 @Component({
   selector: 'app-send-notification',
@@ -44,6 +51,7 @@ export class SendNotificationComponent implements OnInit, OnDestroy {
   showProgressBar: boolean = false;
   categories: ICategory[] = [];
   subscriptions: Subscription[] = [];
+  // private webPushHandler = require('web-push');
 
   constructor(
     private categoryService: CategoryService,
@@ -89,7 +97,6 @@ export class SendNotificationComponent implements OnInit, OnDestroy {
           dialogRef.afterClosed().subscribe((result: IRecommendationResponse) => {
             if (result) {
               console.log("Before start sending notification.");
-              alert(result)
               this.sendNotification(result);
             }
           });
@@ -113,16 +120,11 @@ export class SendNotificationComponent implements OnInit, OnDestroy {
     console.log("Start sending notification.");
     console.log(result);
     console.log("Hello1!");
-    let webpush  = require('web-push');
+    
     console.log("Hello2!");
-    console.log(webpush);
-    webpush['setVapidDetails'](
-      'mailto:ioanapopa144@gmail.com',
-      environment.VAPID_PUBLIC_KEY,
-      environment.VAPID_PRIVATE_KEY
-    );
 
-    console.log("SetVapidDetails okay.");
+    const webPush = require('web-push');
+    console.log(webPush);
 
     const notificationPayload = {
       "notification": {
@@ -141,7 +143,13 @@ export class SendNotificationComponent implements OnInit, OnDestroy {
       }
     };
 
-    console.log("NotificationPayload okay.");
+    webPush.setVapidDetails(
+      'mailto:ioanapopa144@gmail.com',
+      environment.VAPID_PUBLIC_KEY,
+      environment.VAPID_PRIVATE_KEY
+    );
+
+    console.log("SetVapidDetails okay.");
 
     let allSubscriptions = [];
 
@@ -167,7 +175,7 @@ export class SendNotificationComponent implements OnInit, OnDestroy {
     console.log("Number of subscriptions: " + allSubscriptions.length);
 
     Promise.all(allSubscriptions.map(sub => 
-      webpush['sendNotification'](sub, JSON.stringify(notificationPayload))
+      webPush.sendNotification(sub, JSON.stringify(notificationPayload))
       ))
       .then(() => {
           this.showProgressBar = false;
@@ -179,4 +187,3 @@ export class SendNotificationComponent implements OnInit, OnDestroy {
       });
   }
 }
-
