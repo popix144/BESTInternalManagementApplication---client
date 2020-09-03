@@ -8,6 +8,7 @@ import { SendNotificationService } from 'src/app/services/send-notification.serv
 import { IRecommendationResponse } from 'src/app/models/recommendationResponse.interface';
 import { environment } from 'src/environments/environment.prod';
 import { ICategory } from 'src/app/models/category.interface';
+import * as webNotification from 'simple-web-notification';
 
 // const webPush = require('web-push');
 // console.log('webpush import', webPush);
@@ -155,18 +156,41 @@ export class SendNotificationComponent implements OnInit, OnDestroy {
 
     console.log('Number of subscriptions: ', allSubscriptions.length);
 
-    Promise.all(allSubscriptions.map(sub => {
-      console.log("Subscription: ", sub);
-      webPush.sendNotification(sub, JSON.stringify(notificationPayload))
-    }))
-      .then(() => {
-          this.showProgressBar = false;
-          this.snackBar.open("Notification sent successfully.");
-      })
-      .catch(err => {
-          console.log("Error: ", err);
-          this.showProgressBar = false;
-          this.snackBar.open("Error sending notification.");
+    // Promise.all(allSubscriptions.map(sub => {
+    //   console.log("Subscription: ", sub);
+    //   webPush.sendNotification(sub, JSON.stringify(notificationPayload))
+    // }))
+    //   .then(() => {
+    //       this.showProgressBar = false;
+    //       this.snackBar.open("Notification sent successfully.");
+    //   })
+    //   .catch(err => {
+    //       console.log("Error: ", err);
+    //       this.showProgressBar = false;
+    //       this.snackBar.open("Error sending notification.");
+    //   });
+
+
+
+      webNotification.showNotification(result.notification.title, {
+          body: ' This notification was received by ' + allSubscriptions.length + ' user(s)! ' + result.notification.text,
+          icon: '../../../assets/icons/icon-96x96.png',
+          onClick: function onNotificationClicked() {
+              console.log('Notification clicked.');
+          },
+          autoClose: 4000 //auto close the notification after 4 seconds (you can manually close it via hide function)
+      }, function onShow(error, hide) {
+          if (error) {
+              window.alert('Unable to show notification: ' + error.message);
+          } else {
+              console.log('Notification Shown.');
+   
+              setTimeout(function hideNotification() {
+                  console.log('Hiding notification....');
+                  hide(); //manually close the notification (you can skip this if you use the autoClose option)
+              }, 5000);
+          }
       });
-  }
+    }
+  
 }

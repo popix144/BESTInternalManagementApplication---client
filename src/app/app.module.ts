@@ -100,6 +100,7 @@ import { ChangeInterestCategoryComponent } from './components/change-interest-ca
     MatSlideToggleModule,
     AppRoutingModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    
   ],
   providers: [
     {
