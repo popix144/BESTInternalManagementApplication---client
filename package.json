@@ -11,8 +11,6 @@
   },
   "private": true,
   "browser": {
-    "crypto": false,
-    "stream": false,
     "https": false,
     "tls": false,
     "net": false
@@ -34,7 +32,9 @@
     "@auth0/angular-jwt": "^4.0.0",
     "@types/node": "~8.9.4",
     "@types/webpack-env": "^1.15.2",
+    "process": "^0.11.10",
     "rxjs": "~6.4.0",
+    "stream": "0.0.2",
     "tslib": "^1.9.0",
     "web-push": "^3.2.5",
     "zone.js": "~0.9.1"

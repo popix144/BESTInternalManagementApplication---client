@@ -8,14 +8,9 @@ import { SendNotificationService } from 'src/app/services/send-notification.serv
 import { IRecommendationResponse } from 'src/app/models/recommendationResponse.interface';
 import { environment } from 'src/environments/environment.prod';
 import { ICategory } from 'src/app/models/category.interface';
-// import webPush from 'web-push';
 
-// if (typeof webPush === 'undefined') {
-//   let webPush = require('web-push');
-// }
-
-const webPush = require('web-push');
-console.log('webpush import', webPush);
+// const webPush = require('web-push');
+// console.log('webpush import', webPush);
 
 @Component({
   selector: 'app-send-notification',
@@ -52,7 +47,6 @@ export class SendNotificationComponent implements OnInit, OnDestroy {
   showProgressBar: boolean = false;
   categories: ICategory[] = [];
   subscriptions: Subscription[] = [];
-  // private webPushHandler = require('web-push');
 
   constructor(
     private categoryService: CategoryService,
@@ -120,12 +114,9 @@ export class SendNotificationComponent implements OnInit, OnDestroy {
   sendNotification(result: IRecommendationResponse) {
     console.log("Start sending notification.");
     console.log(result);
-    console.log("Hello1!");
-    
-    console.log("Hello2!");
 
-    // const webPush = require('web-push');
-    // console.log(webPush);
+    const webPush = require('web-push');
+    console.log('webPush', webPush);
 
     const notificationPayload = {
       "notification": {
@@ -136,11 +127,7 @@ export class SendNotificationComponent implements OnInit, OnDestroy {
           "data": {
               "dateOfArrival": Date.now(),
               "primaryKey": 1
-          },
-          "actions": [{
-              "action": "explore",
-              "title": "Go to the site"
-          }]
+          }
       }
     };
 
@@ -150,14 +137,9 @@ export class SendNotificationComponent implements OnInit, OnDestroy {
       environment.VAPID_PRIVATE_KEY
     );
 
-    console.log("SetVapidDetails okay.");
-
     let allSubscriptions = [];
 
-    console.log(allSubscriptions.length);
-
     result.users.forEach(user => {
-      console.log(user);
       if (user.subscriptionDTO !== null) {
         let subscription = {
           "endpoint": user.subscriptionDTO.endpoint,
@@ -167,22 +149,22 @@ export class SendNotificationComponent implements OnInit, OnDestroy {
             "auth": user.subscriptionDTO.auth
           }
         };
-        console.log("Subscription: ");
-        console.log(subscription);
         allSubscriptions.push(subscription);
       }
     })
 
-    console.log("Number of subscriptions: " + allSubscriptions.length);
+    console.log('Number of subscriptions: ', allSubscriptions.length);
 
-    Promise.all(allSubscriptions.map(sub => 
+    Promise.all(allSubscriptions.map(sub => {
+      console.log("Subscription: ", sub);
       webPush.sendNotification(sub, JSON.stringify(notificationPayload))
-      ))
+    }))
       .then(() => {
           this.showProgressBar = false;
           this.snackBar.open("Notification sent successfully.");
       })
       .catch(err => {
+          console.log("Error: ", err);
           this.showProgressBar = false;
           this.snackBar.open("Error sending notification.");
       });
