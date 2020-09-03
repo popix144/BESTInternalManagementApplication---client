@@ -14,7 +14,8 @@ import { ICategory } from 'src/app/models/category.interface';
 //   let webPush = require('web-push');
 // }
 
-// console.log(webPush);
+const webPush = require('web-push');
+console.log('webpush import', webPush);
 
 @Component({
   selector: 'app-send-notification',
@@ -123,8 +124,8 @@ export class SendNotificationComponent implements OnInit, OnDestroy {
     
     console.log("Hello2!");
 
-    const webPush = require('web-push');
-    console.log(webPush);
+    // const webPush = require('web-push');
+    // console.log(webPush);
 
     const notificationPayload = {
       "notification": {
